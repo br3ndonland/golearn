@@ -128,9 +128,9 @@ golearn on  main [?⇡] via 🐹 v1.20.4
 go: go.mod file not found in current directory or any parent directory; see 'go help modules'
 ```
 
-The first time I tried to run tests with `go test`, I got the error `go: cannot find main module; see 'go help modules'`. The "Hello, World" chapter of Learn Go with Tests instructed me to run `go mod init helloworld`.
+[The "Hello, World" chapter of Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/hello-world) suggested running `go mod init`.
 
-After running `go mod init` in a subfolder and then hovering over the module or package name in a Go file with the [VSCode Go extension](https://open-vsx.org/extension/golang/Go) enabled (extension ID `golang.go`), I see an error:
+After running `go mod init` in the subfolder and then hovering over the module or package name in a Go file with the [VSCode Go extension](https://open-vsx.org/extension/golang/Go) enabled (extension ID `golang.go`), I see an error:
 
 > gopls was not able to find modules in your workspace.
 > When outside of GOPATH, gopls needs to know which modules you are working on.
