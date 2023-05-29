@@ -26,6 +26,9 @@ Go through these resources:
 
 - [Go docs](https://go.dev/doc/) (note that the Go docs don't have built-in search, despite the fact that Go comes from Google)
 - [Effective Go](https://go.dev/doc/effective_go) (I guess this is like the more comprehensive reference manual?)
+- [Go references](https://go.dev/doc/#references) (ah, okay, _this_ is the more comprehensive reference manual)
+  - [Go language specification](https://go.dev/ref/spec)
+  - [Go modules reference](https://go.dev/ref/mod)
 - [Go Time podcast](https://changelog.com/gotime)
 - [Domain-Driven Design with Go](https://www.packtpub.com/product/domain-driven-design-with-golang/9781804613450) (found via [Go Time 273](https://changelog.com/gotime/273))
 
