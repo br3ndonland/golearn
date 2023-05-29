@@ -1,11 +1,36 @@
 package main
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func assertCorrectSum(t testing.TB, got, want int) {
 	t.Helper()
 	if got != want {
 		t.Errorf("got %d want %d", got, want)
+	}
+}
+
+func assertDeepEqual(t testing.TB, got, want []int) {
+	t.Helper()
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("got %v want %v", got, want)
+	}
+}
+
+func assertEachCorrectSum(t testing.TB, got, want []int) {
+	// array comparison algorithm similar to reflect.DeepEqual()
+	t.Helper()
+	gotLen := len(got)
+	wantLen := len(want)
+	if gotLen != wantLen {
+		t.Errorf("got slice is length %d but want slice is %d", gotLen, wantLen)
+	}
+	for i, value := range want {
+		if value != got[i] {
+			t.Errorf("got %d want %d", got[i], value)
+		}
 	}
 }
 
@@ -28,4 +53,11 @@ func TestSumArrayOfFiveNumbers(t *testing.T) {
 		want := 380
 		assertCorrectSum(t, got, want)
 	})
+}
+
+func TestSumAll(t *testing.T) {
+	got := SumAll([]int{3, 9}, []int{0, 9})
+	want := []int{12, 9}
+	assertEachCorrectSum(t, got, want)
+	assertDeepEqual(t, got, want)
 }
