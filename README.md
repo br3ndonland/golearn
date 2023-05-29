@@ -139,7 +139,7 @@ After running `go mod init` in a subfolder and then hovering over the module or 
 > See the documentation for more information on setting up your workspace:
 > https://github.com/golang/tools/blob/master/gopls/doc/workspace.md. `go list`
 
-<img src="" alt="Screenshot of VSCode showing gopls error" width="50%" />
+<img src="https://github.com/br3ndonland/golearn/assets/26674818/937a5350-cc66-4d09-bfac-7f1d6c117632" alt="Screenshot of VSCode showing gopls error" width="50%" />
 
 The [`gopls` docs](https://github.com/golang/tools/blob/5974258e689a4f8a93448a0d181737afa4506e3f/gopls/doc/workspace.md) (the Go language server) say:
 
