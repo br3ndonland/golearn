@@ -61,3 +61,16 @@ func TestSumAll(t *testing.T) {
 	assertEachCorrectSum(t, got, want)
 	assertDeepEqual(t, got, want)
 }
+
+func TestSumAllTails(t *testing.T) {
+	t.Run("sum tails of two slices", func(t *testing.T) {
+		got := SumAllTails([]int{1, 2}, []int{0, 9})
+		want := []int{2, 9}
+		assertDeepEqual(t, got, want)
+	})
+	t.Run("sum tails with empty slice present", func(t *testing.T) {
+		got := SumAllTails([]int{1, 2}, []int{})
+		want := []int{2, 0}
+		assertDeepEqual(t, got, want)
+	})
+}
