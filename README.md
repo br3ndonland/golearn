@@ -32,6 +32,69 @@ Go through these resources:
 - [Go Time podcast](https://changelog.com/gotime)
 - [Domain-Driven Design with Go](https://www.packtpub.com/product/domain-driven-design-with-golang/9781804613450) (found via [Go Time 273](https://changelog.com/gotime/273))
 
+## Syntax
+
+### Names
+
+[Effective Go](https://go.dev/doc/effective_go#names) has general info on names. Key points:
+
+> By convention, packages are given lower case, single-word names; there should be no need for underscores or mixedCaps...
+> Another convention is that the package name is the base name of its source directory; the package in `src/encoding/base64` is imported as `"encoding/base64"` but has name `base64`, not `encoding_base64` and not `encodingBase64`...
+> Finally, the convention in Go is to use `MixedCaps` or `mixedCaps` rather than underscores to write multiword names.
+
+The comments on not using underscores don't seem to apply to [test files](https://go.dev/doc/code#Testing), which are written with names ending in `_test.go`.
+
+[A Tour of Go](https://go.dev/tour/basics/3) explains exported names:
+
+> In Go, a name is exported if it begins with a capital letter. For example, `Pizza` is an exported name, as is `Pi`, which is exported from the `math` package.
+
+Go files can be written with names out-of-order, and Go is able to handle this when determining [order of evaluation](https://go.dev/ref/spec#Order_of_evaluation) of the expressions. [Python resolves names](https://docs.python.org/3/reference/executionmodel.html#resolution-of-names) approximately top-to-bottom (from the top of a file to the bottom), so in Python, the order of names is more important.
+
+### Command-line applications
+
+As described in the ["Get started with Go" tutorial](https://go.dev/doc/tutorial/getting-started) and [Go language spec](https://go.dev/ref/spec#Program_execution), `func main()` is used to determine behavior when running the program from the command-line, like `if __name__ == "__main__":` [in Python](https://docs.python.org/3/tutorial/modules.html#executing-modules-as-scripts).
+
+### Iteration
+
+[`for` is Go's `while`](https://go.dev/tour/flowcontrol/3):
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	sum := 1
+	for sum < 10 {
+		sum += sum
+	}
+	fmt.Println(sum)
+}
+```
+
+An infinite loop is simply `for`:
+
+```go
+package main
+
+func main() {
+	for {
+	}
+}
+```
+
+### Strings and runes
+
+Strings must be double-quoted. A single-quoted character is called a [rune](https://go.dev/doc/go1#rune) and has its own data type.
+
+### Arrays and slices
+
+Go's arrays are fixed-length. Variable-length arrays are called "[slices](https://go.dev/doc/effective_go#slices)" and, [like "package" and "module,"](#go-packages-and-modules) the term "slice" is used differently in Go than it may be elsewhere. [In Python, a "slice" is a part of a list](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range), whereas in Go a slice is the list itself. Slices can be sliced.
+
+### Formatting
+
+[Go has a built-in formatter](https://go.dev/doc/effective_go#formatting) `gofmt` that formats indentations with tabs and does not enforce a maximum line length.
+
 ## Troubleshooting
 
 ### Go workspaces
