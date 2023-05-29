@@ -191,3 +191,47 @@ use (
 ```
 
 Note that the [GitHub Go `.gitignore` template](https://github.com/github/gitignore/blob/4488915eec0b3a45b5c63ead28f286819c0917de/Go.gitignore) is configured to ignore `go.work` files.
+
+I guess a simpler way of doing this would have been running `go mod init golearn` in the top-level directory to have a single `go.mod` file, then adding subdirectories without their own `go.mod` files. I figured this out after learning more about Go modules. Read on.
+
+### Go packages and modules
+
+#### `Package is not a main package` errors
+
+After moving `helloworld` to a subdirectory and running `go mod init` to establish the module, I first tried changing the `package` lines in `hello.go` and `hello_test.go` to say `package helloworld`, but that led to errors like `package command-line-arguments is not a main package` (in the top-level directory) and `package helloworld is not in GOROOT (/opt/homebrew/Cellar/go/1.20.4/libexec/src/helloworld)` (in the package directory). I also saw a notice in `hello.go` that `func main is unused`.
+
+To resolve the errors, the module name in `go.mod` should say `module helloworld`, but the `package` lines in `hello.go` and `hello_test.go` should say `package main`. The Go CLI and VSCode extension could provide some clearer instructions here.
+
+#### `Cannot import "main"` errors
+
+Tutorials commonly include all source code in `package main` examples, which allows the examples to be run from the command-line, but this is not how a larger module would be built. The ["Learn Go with Tests" chapter on arrays and slices](https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/arrays-and-slices) explains:
+
+> If you had initialized go mod with `go mod init main` you will be presented with an error `_testmain.go:13:2: cannot import "main"`. This is because according to common practice, package main will only contain integration of other packages and not unit-testable code and hence Go will not allow you to import a package with name `main`.
+>
+> To fix this, you can rename the main module in `go.mod` to any other name.
+
+Did they mean "Go will not allow you to import a ~~package~~ _module_ with name `main`"? Tests seem to work on `package main` examples.
+
+#### Definitions of package and module
+
+_So what's the difference between a package and a module?_
+
+The Go docs on "[How to write Go code](https://go.dev/doc/code)" explain,
+
+> Go programs are organized into packages. A _package_ is a collection of source files in the same directory that are compiled together. Functions, types, variables, and constants defined in one source file are visible to all other source files within the same package.
+>
+> A repository contains one or more modules. A _module_ is a collection of related Go packages that are released together. A Go repository typically contains only one module, located at the root of the repository. A file named `go.mod` there declares the _module path_: the import path prefix for all packages within the module. The module contains the packages in the directory containing its go.mod file as well as subdirectories of that directory, up to the next subdirectory containing another `go.mod` file (if any).
+>
+> ...
+>
+> The first statement in a Go source file must be `package name`. Executable commands must always use `package main`.
+
+The [Go modules docs](https://go.dev/ref/mod) provide more in-depth documentation.
+
+This is effectively the inverse of Python - a [Python module](https://docs.python.org/3/tutorial/modules.html) is a `.py` file, whereas a [Python package](https://docs.python.org/3/tutorial/modules.html#packages) is a collection of modules in a directory with a `__init__.py` file in it. Packages can have subpackages, which are additional directories inside the package directory with `__init__.py` files in them.
+
+Most other real-world definitions of "package" appear to follow the Python convention and not the Go convention. For example, GitHub calls their service "[GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)" not "GitHub Modules."
+
+#### Setting up the Go module
+
+At this point, I realized I didn't need Go workspaces. I deleted the `go.mod` files from each subdirectory, and added a single `go.mod` file to the top-level directory with `go mod init github.com/br3ndonland/golearn`, following the naming suggested in the [Go modules docs](https://go.dev/ref/mod).
