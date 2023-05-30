@@ -27,9 +27,9 @@ func assertEachCorrectSum(t testing.TB, got, want []int) {
 	if gotLen != wantLen {
 		t.Errorf("got slice is length %d but want slice is %d", gotLen, wantLen)
 	}
-	for i, value := range want {
-		if value != got[i] {
-			t.Errorf("got %d want %d", got[i], value)
+	for i, got_value := range got {
+		if got_value != want[i] {
+			t.Errorf("got %d want %d", got_value, want[i])
 		}
 	}
 }
