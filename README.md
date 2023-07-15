@@ -91,6 +91,62 @@ Strings must be double-quoted. A single-quoted character is called a [rune](http
 
 Go's arrays are fixed-length. Variable-length arrays are called "[slices](https://go.dev/doc/effective_go#slices)" and, [like "package" and "module,"](#go-packages-and-modules) the term "slice" is used differently in Go than it may be elsewhere. [In Python, a "slice" is a part of a list](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range), whereas in Go a slice is the list itself. Slices can be sliced.
 
+### Structs
+
+[A Tour of Go](https://go.dev/tour/moretypes/2) says, "A struct is a collection of fields. Struct fields are accessed using a dot. Struct fields can be accessed through a struct pointer." Hmm, not very helpful. The "[How to Write Go Code](https://go.dev/doc/code)" docs are not particularly helpful either - the example code introduces a struct without explaining what it is. The [Go language spec section on struct types](https://go.dev/ref/spec#Struct_types) is esoteric and doesn't get us much further. So let's just look at an example from the [structs chapter of "Learn Go with Tests"](https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/structs-methods-and-interfaces) (in [`shapes.go`](./structs/shapes.go) in this repo).
+
+```go
+type Rectangle struct {
+	Width  float64
+	Height float64
+}
+```
+
+### Methods
+
+[The Go language spec section on method declarations](https://go.dev/ref/spec#Method_declarations) says, "A method is a function with a receiver." The "receiver" can be any type (built-in types or structs). When methods are called, they must be called on an instance of the type. In this sense, it seems like Go methods are somewhat like [Python class](https://docs.python.org/3/tutorial/classes.html) instance methods, which accept a class instance (`self`) as their receiver.
+
+The receiver variable is conventionally named with the first letter of the type, like `r Rectangle`.
+
+Methods are not nested or indented inside their receiver types, so the `func` syntax itself is the only syntactic indication that a method is associated with a receiver.
+
+Adding methods to the struct example would look like this:
+
+```go
+type Rectangle struct {
+	Width  float64
+	Height float64
+}
+
+func (r Rectangle) Perimeter() float64 {
+	return 2 * (r.Width + r.Height)
+}
+
+func (r Rectangle) Area() float64 {
+	return r.Width * r.Height
+}
+```
+
+### Interfaces
+
+[Interfaces](https://go.dev/ref/spec#Interface_types) are somewhat like [abstract base classes in Python](https://docs.python.org/3/glossary.html#term-abstract-base-class). One difference from other programming languages is that interface resolution is implicit in Go. In the example below, `Circle` is automatically a `Shape` because it implements an `Area()` method that returns a `float64`.
+
+```go
+import "math"
+
+type Shape interface {
+	Area() float64
+}
+
+type Circle struct {
+	Radius float64
+}
+
+func (c Circle) Area() float64 {
+	return math.Pi * c.Radius * c.Radius
+}
+```
+
 ### Formatting
 
 [Go has a built-in formatter](https://go.dev/doc/effective_go#formatting) `gofmt` that formats indentations with tabs and does not enforce a maximum line length.
