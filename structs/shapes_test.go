@@ -14,3 +14,9 @@ func TestPerimeter(t *testing.T) {
 	want := 40.0
 	assertCorrectFloat(t, got, want)
 }
+
+func TestArea(t *testing.T) {
+	got := Area(10.0, 10.0)
+	want := 100.0
+	assertCorrectFloat(t, got, want)
+}
