@@ -46,7 +46,7 @@ Go through these resources:
 > Another convention is that the package name is the base name of its source directory; the package in `src/encoding/base64` is imported as `"encoding/base64"` but has name `base64`, not `encoding_base64` and not `encodingBase64`...
 > Finally, the convention in Go is to use `MixedCaps` or `mixedCaps` rather than underscores to write multiword names.
 
-The comments on not using underscores appears to only relate to _package names_, not _file names_. [Test files](https://go.dev/doc/code#Testing) are written with names ending in `_test.go`.
+The comments on not using underscores apply to _package names_, not _file names_. [Test files](https://go.dev/doc/code#Testing) are written with names ending in `_test.go`.
 
 [A Tour of Go](https://go.dev/tour/basics/3) explains exported names:
 
