@@ -1,4 +1,4 @@
-package main
+package arrays
 
 func SumArrayOfFiveNumbers(numbers [5]int) int {
 	sum := 0
