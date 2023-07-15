@@ -17,16 +17,18 @@ func TestPerimeter(t *testing.T) {
 }
 
 func TestArea(t *testing.T) {
-	t.Run("rectangle", func(t *testing.T) {
-		rectangle := Rectangle{10.0, 10.0}
-		got := rectangle.Area()
-		want := 100.0
+	checkArea := func(t testing.TB, shape Shape, want float64) {
+		got := shape.Area()
 		assertCorrectFloat(t, got, want)
+	}
+	t.Run("rectangle", func(t *testing.T) {
+		shape := Rectangle{10.0, 10.0}
+		want := 100.0
+		checkArea(t, shape, want)
 	})
 	t.Run("circle", func(t *testing.T) {
-		circle := Circle{10}
-		got := circle.Area()
+		shape := Circle{10}
 		want := 314.1592653589793
-		assertCorrectFloat(t, got, want)
+		checkArea(t, shape, want)
 	})
 }
