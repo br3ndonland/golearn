@@ -29,6 +29,10 @@ Go through these resources:
 - [Go references](https://go.dev/doc/#references) (ah, okay, _this_ is the more comprehensive reference manual)
   - [Go language specification](https://go.dev/ref/spec)
   - [Go modules reference](https://go.dev/ref/mod)
+- [Go 1 release notes](https://go.dev/doc/go1)
+- [Go GitHub Wiki](https://github.com/golang/go/wiki)
+  - [Table-driven tests](https://github.com/golang/go/wiki/TableDrivenTests)
+- [Awesome Go](https://github.com/avelino/awesome-go)
 - [Go Time podcast](https://changelog.com/gotime)
 - [Domain-Driven Design with Go](https://www.packtpub.com/product/domain-driven-design-with-golang/9781804613450) (found via [Go Time 273](https://changelog.com/gotime/273))
 
