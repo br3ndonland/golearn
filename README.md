@@ -151,6 +151,16 @@ func (c Circle) Area() float64 {
 }
 ```
 
+### Pointers
+
+Go copies values when they are passed in to functions or methods. Pointers can be used to access values directly instead of copying them. Pointers are indicated with an asterisk (`*`) before the name of the value. Within functions that accept pointers as arguments, the pointers are automatically "dereferenced," meaning that the value at the memory address is identified rather than the memory address itself. See the example from the pointers chapter of "Learn Go with Tests" in [`wallet.go`](./pointers/wallet.go).
+
+```go
+func (w *Wallet) Deposit(amount Bitcoin) {
+	w.balance += amount
+}
+```
+
 ### Formatting
 
 [Go has a built-in formatter](https://go.dev/doc/effective_go#formatting) `gofmt` that formats indentations with tabs and does not enforce a maximum line length.
