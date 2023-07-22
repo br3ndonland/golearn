@@ -1,11 +1,23 @@
 package pointers
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func assertCorrectBalance(t testing.TB, got, want Bitcoin) {
 	t.Helper()
 	if got != want {
-		t.Errorf("got %s want %s", got, want)
+		t.Errorf("got %d want %d", got, want)
+	}
+}
+
+func assertCorrectBalanceString(t testing.TB, got, want Bitcoin) {
+	t.Helper()
+	gotString := got.String()
+	wantString := fmt.Sprintf("%d BTC", got)
+	if gotString != wantString {
+		t.Errorf("String format incorrect: got %s want %s", gotString, wantString)
 	}
 }
 
@@ -15,4 +27,5 @@ func TestWallet(t *testing.T) {
 	got := wallet.Balance()
 	want := Bitcoin(10)
 	assertCorrectBalance(t, got, want)
+	assertCorrectBalanceString(t, got, want)
 }
