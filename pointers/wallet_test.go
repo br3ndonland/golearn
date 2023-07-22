@@ -10,14 +10,22 @@ func assertCorrectBalance(t testing.TB, got, want Bitcoin) {
 	if got != want {
 		t.Errorf("got %d want %d", got, want)
 	}
-}
-
-func assertCorrectBalanceString(t testing.TB, got, want Bitcoin) {
-	t.Helper()
 	gotString := got.String()
 	wantString := fmt.Sprintf("%d BTC", got)
 	if gotString != wantString {
 		t.Errorf("String format incorrect: got %s want %s", gotString, wantString)
+	}
+}
+
+func assertError(t testing.TB, got, want error) {
+	t.Helper()
+	if got == nil {
+		t.Fatal("error expected")
+	}
+	gotErr := got.Error()
+	wantErr := want.Error()
+	if gotErr != wantErr {
+		t.Errorf("got %q want %q", got, want)
 	}
 }
 
@@ -28,7 +36,6 @@ func TestWallet(t *testing.T) {
 		got := wallet.Balance()
 		want := Bitcoin(10)
 		assertCorrectBalance(t, got, want)
-		assertCorrectBalanceString(t, got, want)
 	})
 	t.Run("withdraw", func(t *testing.T) {
 		wallet := Wallet{balance: Bitcoin(20)}
@@ -36,6 +43,13 @@ func TestWallet(t *testing.T) {
 		got := wallet.Balance()
 		want := Bitcoin(10)
 		assertCorrectBalance(t, got, want)
-		assertCorrectBalanceString(t, got, want)
+	})
+	t.Run("withdraw with insufficient funds", func(t *testing.T) {
+		startingBalance := Bitcoin(20)
+		withdrawalAmount := Bitcoin(100)
+		wallet := Wallet{balance: startingBalance}
+		got := wallet.Withdraw(withdrawalAmount)
+		want := wallet.ErrInsufficientFunds(withdrawalAmount)
+		assertError(t, got, want)
 	})
 }
