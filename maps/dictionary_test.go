@@ -23,6 +23,28 @@ func assertError(t testing.TB, got, want error) {
 	}
 }
 
+func TestMap(t *testing.T) {
+	mapKey := "test"
+	mapValue := "this is just a test"
+	mapInstance := map[string]string{mapKey: mapValue}
+	t.Run("key in map", func(t *testing.T) {
+		got, inMap := mapInstance[mapKey]
+		want := mapValue
+		if got == "" || !inMap {
+			t.Fatal("value expected")
+		}
+		assertCorrectValue(t, got, want)
+	})
+	t.Run("key not in map", func(t *testing.T) {
+		unknownKey := "unknown"
+		got, inMap := mapInstance[unknownKey]
+		if got != "" || inMap {
+			t.Fatal("no value expected")
+		}
+	})
+
+}
+
 func TestGet(t *testing.T) {
 	dictionaryKey := "test"
 	dictionaryValue := "this is just a test"
