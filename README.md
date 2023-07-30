@@ -95,6 +95,14 @@ Strings must be double-quoted. A single-quoted character is called a [rune](http
 
 Go's arrays are fixed-length. Variable-length arrays are called "[slices](https://go.dev/doc/effective_go#slices)" and, [like "package" and "module,"](#go-packages-and-modules) the term "slice" is used differently in Go than it may be elsewhere. [In Python, a "slice" is a part of a list](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range), whereas in Go a slice is the list itself. Slices can be sliced.
 
+### Maps
+
+Go map syntax is intuitive and similar to Python dictionaries.
+
+Map keys and values can be set using square bracket syntax, like `mapInstance[key] = value`.
+
+Map lookups (getting values with square bracket syntax) have some important differences from Python. Python dictionary lookups return a single value if the key is found, or a `KeyError` exception if the key is not found. Go map lookups return two values: the value if found, and a Boolean indicating whether or not the key is in the map. Assignment of these values would therefore look like `value, inMap := mapInstance[key]`.
+
 ### Structs
 
 [A Tour of Go](https://go.dev/tour/moretypes/2) says, "A struct is a collection of fields. Struct fields are accessed using a dot. Struct fields can be accessed through a struct pointer." Hmm, not very helpful. The "[How to Write Go Code](https://go.dev/doc/code)" docs are not particularly helpful either - the example code introduces a struct without explaining what it is. The [Go language spec section on struct types](https://go.dev/ref/spec#Struct_types) is esoteric and doesn't get us much further. So let's just look at an example from the [structs chapter of "Learn Go with Tests"](https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/structs-methods-and-interfaces) (in [`shapes.go`](./structs/shapes.go) in this repo).
