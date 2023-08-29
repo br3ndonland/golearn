@@ -21,6 +21,9 @@ Go through these resources:
 
 - [A Tour of Go](https://go.dev/tour/welcome/1)
 - [Learn Go with Tests](https://github.com/quii/learn-go-with-tests)
+  - Most of the directory names in this repo match Learn Go with Tests.
+  - [Package](#go-packages-and-modules) names have been changed from `package main` to specific package names.
+  - Source code is only included if it is 100% covered with tests. Learn Go with Tests includes uncovered code and that code is not included here.
 
 ### Go deeper
 
