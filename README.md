@@ -386,3 +386,9 @@ At this point, I realized I didn't need Go workspaces. I deleted the `go.mod` fi
 #### Installing dependencies
 
 One of the most common tasks when [managing dependencies](https://go.dev/doc/modules/managing-dependencies) is installing the a project's dependencies. This can be done with `go mod tidy`.
+
+#### Updating the Go module's Go version
+
+The `go.mod` file has a Go version in it. As explained in the [documentation](https://go.dev/doc/modules/gomod-ref#go), this is the _minimum_ required version of Go.
+
+If the minimum required version needs to be updated, edit the `go.mod` file directly or run `go mod edit -go=NEW_VERSION`.
