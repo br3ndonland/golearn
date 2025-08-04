@@ -382,3 +382,7 @@ Most other real-world definitions of "package" appear to follow the Python conve
 #### Setting up the Go module
 
 At this point, I realized I didn't need Go workspaces. I deleted the `go.mod` files from each subdirectory, and added a single `go.mod` file to the top-level directory with `go mod init github.com/br3ndonland/golearn`, following the naming suggested in the [Go modules docs](https://go.dev/ref/mod).
+
+#### Installing dependencies
+
+One of the most common tasks when [managing dependencies](https://go.dev/doc/modules/managing-dependencies) is installing the a project's dependencies. This can be done with `go mod tidy`.
